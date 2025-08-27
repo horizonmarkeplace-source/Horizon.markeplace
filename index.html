@@ -5,178 +5,149 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HORIZON Marketplace</title>
   <style>
-    /* Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      color: #fff;
-      background: #000;
-      overflow-x: hidden;
+      background: #f5f5f5;
     }
 
-    /* Carrusel de fondo */
+    /* Carrusel ocupa toda la pantalla */
     .carousel {
-      position: fixed;
-      top: 0;
-      left: 0;
+      position: relative;
       width: 100%;
-      height: 100vh;
+      height: 100vh; /* ocupa toda la altura de la pantalla */
       overflow: hidden;
-      z-index: -1;
-    }
-
-    .carousel .slides {
-      display: flex;
-      width: 300%;
-      height: 100%;
-      animation: slide 15s infinite;
     }
 
     .carousel img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: cover; /* ajusta imagen sin dejar blanco */
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
     }
 
-    @keyframes slide {
-      0% { transform: translateX(0); }
-      33% { transform: translateX(-100%); }
-      66% { transform: translateX(-200%); }
-      100% { transform: translateX(0); }
+    .carousel img.active {
+      opacity: 1;
     }
 
-    /* Header */
+    /* Logo */
     header {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+      z-index: 10;
+    }
+
+    /* Contenido */
+    .content {
+      position: relative;
+      z-index: 5;
       text-align: center;
-      padding: 30px 20px;
+      margin-top: -100px;
     }
 
-    header h1 {
-      font-size: 2.5rem;
-      color: #00c3ff;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
-    }
-
-    header p {
-      font-size: 1.2rem;
-      margin-top: 5px;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
-    }
-
-    header button {
-      margin-top: 20px;
-      padding: 12px 24px;
-      background: #00c3ff;
-      border: none;
-      border-radius: 25px;
-      color: #fff;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    header button:hover {
-      background: #0099cc;
-    }
-
-    /* Contenedor productos */
     .productos {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
+      margin: 20px auto;
       gap: 20px;
-      padding: 40px 20px;
+      max-width: 1200px;
     }
 
-    .producto {
-      background: rgba(0, 0, 0, 0.7);
-      border-radius: 15px;
-      padding: 20px;
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       width: 220px;
       text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-      transition: transform 0.3s;
+      padding: 15px;
     }
 
-    .producto:hover {
-      transform: translateY(-10px);
+    .card img {
+      width: 100%;
+      border-radius: 10px;
     }
 
-    .producto h3 {
-      color: #00c3ff;
-      margin-bottom: 10px;
-    }
-
-    .producto p {
-      font-size: 1.2rem;
-      margin-bottom: 15px;
-    }
-
-    .producto button {
-      background: #00c3ff;
+    .btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 15px;
+      background: #00bcd4;
+      color: white;
       border: none;
-      padding: 10px 18px;
-      border-radius: 20px;
-      color: #fff;
-      font-weight: bold;
+      border-radius: 5px;
       cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .producto button:hover {
-      background: #0099cc;
     }
   </style>
 </head>
 <body>
 
-  <!-- Carrusel de fondo -->
+  <!-- Carrusel -->
   <div class="carousel">
-    <div class="slides">
-      <img src="https://picsum.photos/1600/900?random=1" alt="Slide 1">
-      <img src="https://picsum.photos/1600/900?random=2" alt="Slide 2">
-      <img src="https://picsum.photos/1600/900?random=3" alt="Slide 3">
+    <img src="https://source.unsplash.com/1600x900/?technology" class="active" alt="Fondo 1">
+    <img src="https://source.unsplash.com/1600x900/?market" alt="Fondo 2">
+    <img src="https://source.unsplash.com/1600x900/?business" alt="Fondo 3">
+  </div>
+
+  <!-- Logo -->
+  <header>🌐 HORIZON Marketplace</header>
+
+  <!-- Productos -->
+  <div class="content">
+    <h2 style="color:#00bcd4;">Explorar Productos</h2>
+    <div class="productos">
+      <div class="card">
+        <img src="https://source.unsplash.com/300x200/?shoes" alt="Zapatillas">
+        <h3>Zapatillas Horizon</h3>
+        <p>$89.99</p>
+        <button class="btn">Agregar al carrito</button>
+      </div>
+
+      <div class="card">
+        <img src="https://source.unsplash.com/300x200/?headphones" alt="Audífonos">
+        <h3>Audífonos Gamer</h3>
+        <p>$59.99</p>
+        <button class="btn">Agregar al carrito</button>
+      </div>
+
+      <div class="card">
+        <img src="https://source.unsplash.com/300x200/?smartwatch" alt="Smartwatch">
+        <h3>Smartwatch Horizon</h3>
+        <p>$120.00</p>
+        <button class="btn">Agregar al carrito</button>
+      </div>
+
+      <div class="card">
+        <img src="https://source.unsplash.com/300x200/?jacket" alt="Chaqueta">
+        <h3>Chaqueta Deportiva</h3>
+        <p>$45.00</p>
+        <button class="btn">Agregar al carrito</button>
+      </div>
     </div>
   </div>
 
-  <!-- Header -->
-  <header>
-    <h1>HORIZON <span style="color:#fff;">Marketplace</span></h1>
-    <p>Línea comienza aquí 🚀</p>
-    <button>Explorar Productos</button>
-  </header>
+  <!-- JS del carrusel -->
+  <script>
+    let index = 0;
+    const slides = document.querySelectorAll('.carousel img');
 
-  <!-- Productos -->
-  <section class="productos">
-    <div class="producto">
-      <h3>Zapatillas Horizon</h3>
-      <p>$89.99</p>
-      <button>Agregar al carrito</button>
-    </div>
+    function showSlide() {
+      slides.forEach((img, i) => {
+        img.classList.remove('active');
+        if (i === index) img.classList.add('active');
+      });
+      index = (index + 1) % slides.length;
+    }
 
-    <div class="producto">
-      <h3>Audífonos Gamer</h3>
-      <p>$59.99</p>
-      <button>Agregar al carrito</button>
-    </div>
-
-    <div class="producto">
-      <h3>Smartwatch Horizon</h3>
-      <p>$120.00</p>
-      <button>Agregar al carrito</button>
-    </div>
-
-    <div class="producto">
-      <h3>Chaqueta Deportiva</h3>
-      <p>$45.00</p>
-      <button>Agregar al carrito</button>
-    </div>
-  </section>
-
+    setInterval(showSlide, 4000);
+  </script>
 </body>
 </html>
