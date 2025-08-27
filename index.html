@@ -4,102 +4,179 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HORIZON Marketplace</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100">
-
-  <!-- Header -->
-  <header class="bg-white shadow p-4 flex justify-between items-center">
-    <h1 class="text-2xl font-bold text-blue-600">HORIZON</h1>
-    <nav>
-      <ul class="flex space-x-6">
-        <li><a href="#" class="hover:text-blue-600">Inicio</a></li>
-        <li><a href="#" class="hover:text-blue-600">Productos</a></li>
-        <li><a href="#" class="hover:text-blue-600">Vendedores</a></li>
-        <li><a href="#" class="hover:text-blue-600">Contacto</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- Carrusel -->
-  <div id="carousel" class="relative w-full overflow-hidden">
-    <div class="flex transition-transform duration-700 ease-in-out" id="carousel-inner">
-      <img src="https://picsum.photos/1920/600?random=1" class="w-full flex-shrink-0" />
-      <img src="https://picsum.photos/1920/600?random=2" class="w-full flex-shrink-0" />
-      <img src="https://picsum.photos/1920/600?random=3" class="w-full flex-shrink-0" />
-    </div>
-    <!-- Botones -->
-    <button id="prev" class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black/50 text-white px-3 py-2 rounded-full">‹</button>
-    <button id="next" class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black/50 text-white px-3 py-2 rounded-full">›</button>
-  </div>
-
-  <!-- Productos de prueba -->
-  <section class="max-w-6xl mx-auto py-12 px-6">
-    <h2 class="text-3xl font-bold text-center mb-8">Productos Destacados</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-      
-      <!-- Producto -->
-      <div class="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition">
-        <img src="https://picsum.photos/300/200?random=10" class="w-full h-48 object-cover">
-        <div class="p-4">
-          <h3 class="text-lg font-semibold">Zapatillas Urbanas</h3>
-          <p class="text-gray-600">$120.000</p>
-          <button class="mt-3 bg-blue-600 text-white px-4 py-2 rounded-lg w-full hover:bg-blue-700">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <div class="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition">
-        <img src="https://picsum.photos/300/200?random=11" class="w-full h-48 object-cover">
-        <div class="p-4">
-          <h3 class="text-lg font-semibold">Camisa Oversize</h3>
-          <p class="text-gray-600">$85.000</p>
-          <button class="mt-3 bg-blue-600 text-white px-4 py-2 rounded-lg w-full hover:bg-blue-700">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <div class="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition">
-        <img src="https://picsum.photos/300/200?random=12" class="w-full h-48 object-cover">
-        <div class="p-4">
-          <h3 class="text-lg font-semibold">Audífonos Gamer</h3>
-          <p class="text-gray-600">$250.000</p>
-          <button class="mt-3 bg-blue-600 text-white px-4 py-2 rounded-lg w-full hover:bg-blue-700">Agregar al carrito</button>
-        </div>
-      </div>
-
-      <div class="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition">
-        <img src="https://picsum.photos/300/200?random=13" class="w-full h-48 object-cover">
-        <div class="p-4">
-          <h3 class="text-lg font-semibold">Reloj Smart</h3>
-          <p class="text-gray-600">$310.000</p>
-          <button class="mt-3 bg-blue-600 text-white px-4 py-2 rounded-lg w-full hover:bg-blue-700">Agregar al carrito</button>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-gray-800 text-white py-6 text-center">
-    <p>&copy; 2025 HORIZON Marketplace. Todos los derechos reservados.</p>
-  </footer>
-
-  <!-- Script del carrusel -->
-  <script>
-    const carousel = document.getElementById("carousel-inner");
-    const slides = carousel.children.length;
-    let index = 0;
-
-    function showSlide(i) {
-      index = (i + slides) % slides;
-      carousel.style.transform = `translateX(-${index * 100}%)`;
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    document.getElementById("prev").onclick = () => showSlide(index - 1);
-    document.getElementById("next").onclick = () => showSlide(index + 1);
+    body {
+      font-family: Arial, sans-serif;
+      color: #fff;
+      background: #000;
+      overflow-x: hidden;
+    }
 
-    // Auto-play
-    setInterval(() => showSlide(index + 1), 4000);
-  </script>
+    /* Carrusel de fondo */
+    .carousel {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .carousel .slides {
+      display: flex;
+      width: 300%;
+      height: 100%;
+      animation: slide 15s infinite;
+    }
+
+    .carousel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @keyframes slide {
+      0% { transform: translateX(0); }
+      33% { transform: translateX(-100%); }
+      66% { transform: translateX(-200%); }
+      100% { transform: translateX(0); }
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: #00c3ff;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+    }
+
+    header p {
+      font-size: 1.2rem;
+      margin-top: 5px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+    }
+
+    header button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      background: #00c3ff;
+      border: none;
+      border-radius: 25px;
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    header button:hover {
+      background: #0099cc;
+    }
+
+    /* Contenedor productos */
+    .productos {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 40px 20px;
+    }
+
+    .producto {
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 15px;
+      padding: 20px;
+      width: 220px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+      transition: transform 0.3s;
+    }
+
+    .producto:hover {
+      transform: translateY(-10px);
+    }
+
+    .producto h3 {
+      color: #00c3ff;
+      margin-bottom: 10px;
+    }
+
+    .producto p {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+
+    .producto button {
+      background: #00c3ff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 20px;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .producto button:hover {
+      background: #0099cc;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Carrusel de fondo -->
+  <div class="carousel">
+    <div class="slides">
+      <img src="https://picsum.photos/1600/900?random=1" alt="Slide 1">
+      <img src="https://picsum.photos/1600/900?random=2" alt="Slide 2">
+      <img src="https://picsum.photos/1600/900?random=3" alt="Slide 3">
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <h1>HORIZON <span style="color:#fff;">Marketplace</span></h1>
+    <p>Línea comienza aquí 🚀</p>
+    <button>Explorar Productos</button>
+  </header>
+
+  <!-- Productos -->
+  <section class="productos">
+    <div class="producto">
+      <h3>Zapatillas Horizon</h3>
+      <p>$89.99</p>
+      <button>Agregar al carrito</button>
+    </div>
+
+    <div class="producto">
+      <h3>Audífonos Gamer</h3>
+      <p>$59.99</p>
+      <button>Agregar al carrito</button>
+    </div>
+
+    <div class="producto">
+      <h3>Smartwatch Horizon</h3>
+      <p>$120.00</p>
+      <button>Agregar al carrito</button>
+    </div>
+
+    <div class="producto">
+      <h3>Chaqueta Deportiva</h3>
+      <p>$45.00</p>
+      <button>Agregar al carrito</button>
+    </div>
+  </section>
 
 </body>
 </html>
